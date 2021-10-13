@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setError, removeError } from '../../actions/ui.actions';
 import UseForm from '../../hooks/useForm';
 import validator from 'validator';
+import { startLoginEmailPasswordName } from '../../actions/auth.actions';
 
 const Register = () => {
   const dispatch = useDispatch();
 
-  const { msgError } = useSelector(state => state.ui);
+  const { msgError, loading } = useSelector(state => state.ui);
   console.log(msgError);
 
   const [formValues, handleInputChange] = UseForm({
@@ -23,7 +24,7 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      console.log('formulario correcto');
+      dispatch(startLoginEmailPasswordName(email, password, name))
     }
   }
 
@@ -87,7 +88,7 @@ const Register = () => {
           value={password2}
           onChange={handleInputChange}
           />
-        <button type="submit" className="btn btn-primary btn-block mb-5">Register</button>
+        <button type="submit" className="btn btn-primary btn-block mb-5" disabled={loading}>Register</button>
 
         <Link to="/auth/login" className="link">
         Already registered?
