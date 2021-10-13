@@ -1,9 +1,15 @@
 import React from 'react';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setError, removeError } from '../../actions/ui.actions';
 import UseForm from '../../hooks/useForm';
 import validator from 'validator';
 
 const Register = () => {
+  const dispatch = useDispatch();
+
+  const { msgError } = useSelector(state => state.ui);
+  console.log(msgError);
 
   const [formValues, handleInputChange] = UseForm({
     name: 'armando',
@@ -23,15 +29,16 @@ const Register = () => {
 
   const isFormValid = () => {
     if (name.trim().length === 0) {
-      console.log('no netra name');
+      dispatch(setError('Error en name is required'));
       return false
     } else if (!validator.isEmail(email)) {
-      console.log('no netra email');
+      dispatch(setError('Error en email is required or email is not valid'));
       return false
     } else if (password !== password2 || password.length < 5) {
-      console.log('no netra password');
+      dispatch(setError('Error en password'));
       return false
     }
+    dispatch(removeError());
     return true
   }
 
@@ -39,9 +46,13 @@ const Register = () => {
     <div>
       <h3 className="auth__title">Register</h3>
       <form onSubmit={handleRegister}>
-        <div className='auth__alert-error'>
-          
-        </div>
+        {
+          msgError && (
+          <div className='auth__alert-error'>
+            {msgError}
+          </div>
+        )
+        }
         <input
           placeholder="username"
           name="name"
