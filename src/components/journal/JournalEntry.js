@@ -1,25 +1,33 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
 
-const JournalEntry = () => {
+const JournalEntry = ({ id, title, date, body, url }) => {
+
+  const noteDate = moment(date);
+  console.log(noteDate);
+
   return (
     <div className="journal__entry pointer">
-      <div className="journal__entry-picture"
-        style={{
-          backgroundSize: 'cover',
-          backgroundImage: 'url(https://static.dw.com/image/58243360_303.jpg)'
-        }}
-      >
-      </div>
+      {
+        url &&
+        <div className="journal__entry-picture"
+          style={{
+            backgroundSize: 'cover',
+            backgroundImage: `url(${url})`
+          }}
+        >
+          </div>
+      }
       <div className="jorunal__entry-body">
-        <p className="journal__entry-title">Un nuevo dia</p>
+        <p className="journal__entry-title">{ title }</p>
         <p className="journal__entry-content">
-          lorem id in duis ijciudc bdvcuhbvchj
+          {body}
         </p>
       </div>
 
       <div className="journal__entry-date-box">
-        <span>Monday</span>
-        <h4>24</h4>
+        <span>{noteDate.format('dddd')}</span>
+        <h4>{noteDate.format('Do')}</h4>
       </div>
     </div>
   )
