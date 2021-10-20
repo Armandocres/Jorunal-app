@@ -14,7 +14,7 @@ const Register = () => {
 
   const [formValues, handleInputChange] = UseForm({
     name: 'armando',
-    email: 'nando1@gmail.com',
+    email: '',
     password: '123456',
     password2: '123456'
   })
