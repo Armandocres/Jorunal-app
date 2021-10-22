@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <div>
       <h3 className="auth__title">Login</h3>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} class="animate__animated animate__fadeIn animate_faster">
         <input
           placeholder="email"
           name="email"

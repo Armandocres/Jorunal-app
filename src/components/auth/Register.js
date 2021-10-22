@@ -46,7 +46,7 @@ const Register = () => {
   return (
     <div>
       <h3 className="auth__title">Register</h3>
-      <form onSubmit={handleRegister}>
+      <form onSubmit={handleRegister} class="animate__animated animate__fadeIn animate_faster">
         {
           msgError && (
           <div className='auth__alert-error'>

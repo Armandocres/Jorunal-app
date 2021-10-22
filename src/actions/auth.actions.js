@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import { googleAuthProvider } from '../firebase/firebase-config';
 import { finishLoading, startLoading } from "./ui.actions";
+import { noteLogout } from './notes.action';
 import Swal from 'sweetalert2'
 
 
@@ -70,6 +71,7 @@ export const startLogout = () => {
     const auth = getAuth();
     await signOut(auth);
     dispatch(logout());
+    dispatch(noteLogout());
   }
 }
 
